@@ -8,14 +8,22 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0d6nt2l" name="senior" sourceRef="ExclusiveGateway_09ct4g6" targetRef="old">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="JavaScript">var verify = false;
-var age = parseInt(JSON.stringify(getEmployee).slice(-4,-2));
-if(age&gt;60)
+var age = parseInt(JSON.parse(getEmployee).age);
+if(age&gt;=60)
 {
 verify = true;
 }
 verify;</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1iwmq1c" name="junior" sourceRef="ExclusiveGateway_09ct4g6" targetRef="young" />
+    <bpmn:sequenceFlow id="SequenceFlow_1iwmq1c" name="junior" sourceRef="ExclusiveGateway_09ct4g6" targetRef="young">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression" language="JavaScript">var verify = false;
+var age = parseInt(JSON.parse(getEmployee).age);
+if(age&lt;60)
+{
+verify = true;
+}
+verify;</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:callActivity id="young" name="Junior Citizen" calledElement="junior">
       <bpmn:extensionElements>
         <camunda:in variables="all" />
@@ -76,19 +84,19 @@ response;</camunda:script>
         <di:waypoint x="450" y="120" />
         <di:waypoint x="550" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="454" y="168" width="32" height="14" />
+          <dc:Bounds x="464" y="168" width="32" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1iwmq1c_di" bpmnElement="SequenceFlow_1iwmq1c">
         <di:waypoint x="450" y="272" />
-        <di:waypoint x="450" y="340" />
-        <di:waypoint x="550" y="340" />
+        <di:waypoint x="450" y="390" />
+        <di:waypoint x="550" y="390" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="452" y="303" width="28" height="14" />
+          <dc:Bounds x="466" y="331" width="28" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="CallActivity_0rpe5ja_di" bpmnElement="young">
-        <dc:Bounds x="550" y="300" width="100" height="80" />
+        <dc:Bounds x="550" y="350" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="CallActivity_0os9pqu_di" bpmnElement="old">
         <dc:Bounds x="550" y="80" width="100" height="80" />
@@ -101,15 +109,30 @@ response;</camunda:script>
         <di:waypoint x="732" y="120" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_14xz9p3_di" bpmnElement="EndEvent_14xz9p3">
-        <dc:Bounds x="732" y="322" width="36" height="36" />
+        <dc:Bounds x="752" y="372" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0dk20e7_di" bpmnElement="SequenceFlow_0dk20e7">
-        <di:waypoint x="650" y="340" />
-        <di:waypoint x="732" y="340" />
+        <di:waypoint x="650" y="390" />
+        <di:waypoint x="752" y="390" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0iinq91_di" bpmnElement="ServiceTask_0iinq91">
-        <dc:Bounds x="260" y="200" width="100" height="80" />
+        <dc:Bounds x="230" y="207" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_10eb5o6_di" bpmnElement="SequenceFlow_10eb5o6">
+        <di:waypoint x="330" y="247" />
+        <di:waypoint x="425" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_17cjqxs_di" bpmnElement="StartEvent_17cjqxs">
+        <dc:Bounds x="122" y="229" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0enwpf6_di" bpmnElement="SequenceFlow_0enwpf6">
+        <di:waypoint x="158" y="247" />
+        <di:waypoint x="230" y="247" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
+
       <bpmndi:BPMNEdge id="SequenceFlow_10eb5o6_di" bpmnElement="SequenceFlow_10eb5o6">
         <di:waypoint x="360" y="240" />
         <di:waypoint x="393" y="240" />
